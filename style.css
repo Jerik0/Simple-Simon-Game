@@ -1,0 +1,76 @@
+body {
+    background-color: black;
+}
+
+button:focus {
+    outline: none;
+}
+
+#start-game {
+    display: inline;
+    text-align: center;
+    font-size: 1.3em;
+    color: #ffffff;
+    background-color: #ff3b49;
+    border-radius: 10px;
+    border-style: none;
+    width: 100px;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 133px;
+    left: 110px;
+}
+
+#start-game:active {
+    background-color: #cd313c;
+}
+
+#game-container {
+    position: relative;
+    transform: rotate(45deg);
+    margin: 200px auto;
+    height: 325px;
+    width: 325px;
+    border: solid 1px cyan;
+    -webkit-box-shadow: 2px 2px 2px 5px rgba(67, 247, 265, 0.5);
+}
+
+.box {
+    background-color: black;
+    color: #ffffff;
+    position: absolute;
+    border-radius: 50%;
+    height: 400px;
+    width: 400px;
+}
+
+#up {
+    left: -75px;
+    top: -75px;
+}
+
+#down {
+    bottom: -75px;
+    right: -75px;
+}
+
+#left {
+    bottom: -75px;
+    left: -75px;
+}
+
+#right {
+    right: -75px;
+    top: -75px;
+}
+
+@keyframes flash{
+    from {background-color: #6cc8ff;}
+    to {background-color: black;}
+}
+
+.blink {
+    animation-name: flash;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: 1;
+}
