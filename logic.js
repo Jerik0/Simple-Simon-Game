@@ -12,18 +12,19 @@ $(document).ready(function() {
     var i=0;
     var roundCounter = $('#round-count');
     var roundCountText = $('#round-count-text');
-    var options = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+    var options = ["up", "down", "left", "right"];
     var generatedSequence = [];
 
     //----------------------------------------------------------------------------------------------------------------
-    //TODO: QUESTIONS/PROBLEMS TO SOLVE:
-    //TODO: 'Enter' key functionality.
-    //TODO: (last priority): Change 'start game' animation to CSS.
 
 
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
 
+        if (startGame.html('TRY AGAIN')) {
+            i=0;
+            startGame.html('Start Game');
+        }
         //Expands the Game Board. TODO: Working on this.
         animateGame();
 
@@ -46,7 +47,11 @@ $(document).ready(function() {
 
     //Adds functionality to animate gameboard initially.
     function animateGame() {
-
+        if (input.height == '0') {
+            input.animate({
+            height: "toggle",
+            width: "toggle"
+        })};
     }
 
 
@@ -67,7 +72,6 @@ $(document).ready(function() {
 
             switch (event.key) {
                 case "ArrowUp": {
-                    event.preventDefault();
                     up.removeClass('blink');
                     setTimeout(function () {
                         up.addClass('blink');
@@ -75,7 +79,6 @@ $(document).ready(function() {
                 }
                     break;
                 case "ArrowDown": {
-                    event.preventDefault();
                     down.removeClass('blink');
                     setTimeout(function () {
                         down.addClass('blink');
@@ -107,8 +110,14 @@ $(document).ready(function() {
 
     //Create a function to read user's input and match it to array "generatedSequence".
     function match() {
-        if (event.key === generatedSequence[i]) {
+
+        //if the pressed-key's event starts with 'Arrow' and either "Up", "Down", "Left", or "Right"
+        if (event.key === 'Arrow' + capitalizeFirstLetter(generatedSequence[i])) {
+
+            //increase i by 1
             i++;
+
+            //if the value of i is equal to the length of the array 'generatedSequence'
             if (i === generatedSequence.length) {
                 console.log("Win round");
                 roundCounter.html(i+1);
@@ -118,47 +127,48 @@ $(document).ready(function() {
                 console.log("Round not complete yet");
             }
         } else {
-            console.log("Game Over");
+            //shrinks the inputs to nothing when conditions fail.
+            input.animate({
+                height: "toggle",
+                width: "toggle"
+            });
+            startGame.html('TRY AGAIN');
             roundCounter.html('');
-            roundCountText.html('');
+            roundCountText.html('GAME OVER');
             i=0;
         }
     }
 
     function iterator() {
-        generatedSequence.forEach(function(e, i) {
-            switch (e) {
-                case "ArrowUp": {
-                    console.log('up');
-                    up.removeClass('correct');
-                    setTimeout(function () {
-                        up.addClass('correct');
-                    }, 1);
-                } break;
-                case "ArrowDown": {
-                    console.log('down');
-                    down.removeClass('correct');
-                    setTimeout(function () {
-                        down.addClass('correct');
-                    }, 1);
-                } break;
-                case "ArrowLeft": {
-                    console.log('left');
-                    left.removeClass('correct');
-                    setTimeout(function () {
-                        left.addClass('correct');
-                    }, 1);
-                } break;
-                case "ArrowRight": {
-                   console.log('right');
-                    right.removeClass('correct');
-                    setTimeout(function () {
-                        right.addClass('correct');
-                    }, 1);
-                } break;
 
+        //sets its counter to zero inside the function
+        var count = 0;
+
+                        //sets Interval at which to execute iterator
+        var intervalId = setInterval(function() {
+
+            // if the variable 'count' is equal to the length of the array 'generatedSequence'
+            if (count === generatedSequence.length) {
+
+                //clears the interval (stops the function 'iterator')
+                clearInterval(intervalId);
             }
-        });
+
+            //Removes classes 'correct' and 'blink' from anything with class 'box', in order to animate it again. (and not animate blink again).
+            $('.box').removeClass('blink');
+            $('.box').removeClass('correct');
+
+            //adds the class 'correct' to the array "generatedSequence"'s current index which is at position: 'count'.
+            $('#' + generatedSequence[count]).addClass('correct');
+
+            //adds one to the position of count
+            count++;
+        }, 500);
+    }
+
+    //a function whos parameter's first letter will be replaced (with slice) and capitalized.
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     //----------------------------------------------------------------------------------------------------------------

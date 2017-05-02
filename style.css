@@ -3,6 +3,8 @@ body {
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5em;
+    text-align: center;
+    overflow: hidden;
 }
 
 button:focus {
@@ -34,8 +36,6 @@ button:focus {
     margin: 200px auto;
     height: 275px;
     width: 275px;
-    /*border: solid 1px cyan;*/
-    /*-webkit-box-shadow: 2px 2px 2px 5px rgba(67, 247, 265, 0.5);*/
 }
 
 .box {
@@ -80,6 +80,8 @@ button:focus {
     to {color: #ffffff;}
     from {border-radius: 20%}
     to {border-radius: 50%}
+    from {font-size: 1.5em;}
+    to {font-size: 1.7em;}
 }
 
 .blink {
@@ -93,13 +95,11 @@ button:focus {
     to {background-color: transparent;}
     from {border: 1px solid #ff901f;}
     to {border: 1px solid white;}
-    from {color: #ff3640;}
-    to {color: transparent;}
 }
 
 .correct {
 animation-name: correct;
-    animation-duration: .5s;
+    animation-duration: .2s;
     -webkit-animation-iteration-count: 1;
 }
 
