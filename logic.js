@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    "use strict";
+
     var gameBox = $('#game-container');
     var up = $('#up');
     var down = $('#down');
@@ -7,13 +9,29 @@ $(document).ready(function() {
     var right = $('#right');
     var startGame = $('#start-game');
     var input = $('.box');
-    var interval = 1000;
-    var i=0;
+    var i=0; //TODO I think this is causing randomGenerate to have issues.
 
     var options = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
     var generatedSequence = [];
 
     //----------------------------------------------------------------------------------------------------------------
+    //TODO: QUESTIONS/PROBLEMS TO SOLVE:
+    //TODO: 'Enter' key functionality.
+    //TODO: (last priority): Change 'start game' animation to CSS.
+
+
+    //calls the specified functions when the "Start Game" button is clicked.
+    startGame.click(function() {
+
+        animateGame();
+
+        //Adds functionality for arrows to work after Start button is clicked.
+        // matchMaker();
+
+        //Begins generating randomly.
+        randomGenerate();
+
+    });
 
     //Adds functionality to animate gameboard initially.
     function animateGame() {
@@ -26,103 +44,108 @@ $(document).ready(function() {
         }, 400);
     }
 
-    //Create a function to randomly generate a sequence and put the results into the array named "generatedSequence".
+    //Function that randomly generates a sequence from array 'options' and put the results into the array named 'generatedSequence'.
     function randomGenerate () {
+        i=0;
         var random = options[Math.floor(Math.random() * options.length)];
-            generatedSequence.push(random);
+        generatedSequence.push(random);
+        console.log(generatedSequence);
 
-            //This will animate the element that corresponds to the element generated.
-            switch (generatedSequence[i]) {
-                case "ArrowUp": {
-                    up.removeClass('blink');
-                    setTimeout(function() {
-                        up.addClass('blink');
-                    }, 1);
-                } break;
-                case "ArrowDown": {
-                    down.removeClass('blink');
-                    setTimeout(function() {
-                        down.addClass('blink');
-                    } ,1);
-                } break;
-                case "ArrowLeft": {
-                    left.removeClass('blink');
-                    setTimeout(function() {
-                        left.addClass('blink');
-                    } ,1);
-                } break;
-                case "ArrowRight": {
-                    right.removeClass('blink');
-                    setTimeout(function() {
-                        right.addClass('blink');
-                    },1);
-                } break;
-
-            }
-            i++;
     }
 
     //----------------------------------------------------------------------------------------------------------------
 
-    //Create a function to read user's input and match it to array "generatedSequence".
-    function matchMaker() {
         window.addEventListener("keydown", function (event) {
+
+
             switch (event.key) {
                 case "ArrowUp": {
+                    event.preventDefault();
                     up.removeClass('blink');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         up.addClass('blink');
                     }, 1);
-                } break;
+                }
+                    break;
                 case "ArrowDown": {
+                    event.preventDefault();
                     down.removeClass('blink');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         down.addClass('blink');
-                    } ,1);
-                } break;
+                    }, 1);
+                }
+                    break;
                 case "ArrowLeft": {
                     left.removeClass('blink');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         left.addClass('blink');
-                    } ,1);
-                } break;
+                    }, 1);
+                }
+                    break;
                 case "ArrowRight": {
                     right.removeClass('blink');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         right.addClass('blink');
-                    },1);
-                } break;
+                    }, 1);
+                }
+                    break;
             }
-            if (event.key == generatedSequence[i-1]) {
-                repeatIt();
-            } else {
-                console.log("Game Over");
-            }
-        })};
 
-    //Functionality for the game to repeat it's generated numbers and wait for the user's input.
-    function repeatIt() {
-        // console.log(generatedSequence.length[i-1]);
-        for (i=0; generatedSequence.length; i++) {
-            console.log(generatedSequence[i]);
+            if (event.key === "Enter") {
+                // console.log('Enter key worked');
+                animateGame();
+
+                //Begins generating randomly.
+                randomGenerate();
+
+            }
+
+            match();
+        });
+
+    //----------------------------------------------------------------------------
+
+    //Create a function to read user's input and match it to array "generatedSequence".
+    function match() {
+        if (event.key === generatedSequence[i]) {
+            i++;
+            if (i === generatedSequence.length) {
+                console.log("Win round");
+                iterator();
+                randomGenerate();
+            } else {
+                console.log("Round not complete yet");
+            }
+        } else {
+            console.log("Game Over");
+            i=0;
         }
-        randomGenerate();
+    }
+
+    function iterator() {
+        generatedSequence.forEach(function(e, i) {
+            switch (e) {
+                case "ArrowUp": {
+                    console.log('up');
+                    up.fadeIn(100).fadeOut(100).fadeIn(100);
+                } break;
+                case "ArrowDown": {
+                    console.log('down');
+                    down.fadeIn(100).fadeOut(100).fadeIn(100);
+                } break;
+                case "ArrowLeft": {
+                    console.log('left');
+                    left.fadeIn(100).fadeOut(100).fadeIn(100);
+                } break;
+                case "ArrowRight": {
+                   console.log('right');
+                    right.fadeIn(100).fadeOut(100).fadeIn(100);
+                }
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------------------------
-    startGame.click(function() {
 
-        animateGame();
-
-        //Adds functionality for arrows to work after Start button is clicked.
-        matchMaker();
-
-        //Begins generating randomly.
-        randomGenerate();
-
-    });
-
-    //QUESTIONS/PROBLEMS TO SOLVE
-    // How to get values of keypresses to match up to generated array
 
 });

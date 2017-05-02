@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-image: url('img/dark_mosaic.png');
 }
 
 button:focus {
@@ -36,9 +36,14 @@ button:focus {
 }
 
 .box {
-    background-color: black;
-    color: #ffffff;
+    transform: rotate(-45deg);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+    background-image: url('img/dark_mosaic.png');
+    color: transparent;
     position: absolute;
+    border: 1px solid black;
     border-radius: 50%;
     height: 400px;
     width: 400px;
@@ -65,8 +70,10 @@ button:focus {
 }
 
 @keyframes flash{
-    from {background-color: #6cc8ff;}
-    to {background-color: black;}
+    from {border: 1px solid #6cc8ff;}
+    to {border: 1px solid black;}
+    from {color: #ffffff;}
+    to {color: black;}
 }
 
 .blink {
