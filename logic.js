@@ -16,7 +16,12 @@ $(document).ready(function() {
     var generatedSequence = [];
 
     //----------------------------------------------------------------------------------------------------------------
-
+    //TODO: Iterator will not animate second consecutive animation on same element
+    //TODO: Complete 'game over' functionality: 'restart' button appears and resets everything.
+    //TODO: Change start button when clicked on.
+    //TODO: Add difficulty functionality and slider - easy, medium and hard
+    //TODO: Add sounds and (maybe) music.
+    //TODO: Work on 'enter' key functionality.
 
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
