@@ -1,5 +1,8 @@
 body {
     background-image: url('img/dark_mosaic.png');
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
 }
 
 button:focus {
@@ -17,8 +20,8 @@ button:focus {
     width: 100px;
     transform: rotate(-45deg);
     position: absolute;
-    top: 133px;
-    left: 110px;
+    top: 95px;
+    left: 85px;
 }
 
 #start-game:active {
@@ -29,55 +32,77 @@ button:focus {
     position: relative;
     transform: rotate(45deg);
     margin: 200px auto;
-    height: 325px;
-    width: 325px;
-    border: solid 1px cyan;
-    -webkit-box-shadow: 2px 2px 2px 5px rgba(67, 247, 265, 0.5);
+    height: 275px;
+    width: 275px;
+    /*border: solid 1px cyan;*/
+    /*-webkit-box-shadow: 2px 2px 2px 5px rgba(67, 247, 265, 0.5);*/
 }
 
 .box {
+    border-style: outset;
+    color: transparent;
     transform: rotate(-45deg);
     text-align: center;
     vertical-align: middle;
     line-height: 200px;
-    background-image: url('img/dark_mosaic.png');
-    color: transparent;
+    background-color: aquamarine;
     position: absolute;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 50%;
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
 }
 
 #up {
-    left: -75px;
-    top: -75px;
+    left: -100px;
+    top: -100px;
 }
 
 #down {
-    bottom: -75px;
-    right: -75px;
+    bottom: -100px;
+    right: -100px;
 }
 
 #left {
-    bottom: -75px;
-    left: -75px;
+    bottom: -100px;
+    left: -100px;
 }
 
 #right {
-    right: -75px;
-    top: -75px;
+    right: -100px;
+    top: -100px;
 }
 
-@keyframes flash{
-    from {border: 1px solid #6cc8ff;}
-    to {border: 1px solid black;}
-    from {color: #ffffff;}
-    to {color: black;}
+@keyframes flash {
+    from {border: 2px solid #30df5c;}
+    to {border: 1px solid #ffffff;}
+    from {color: #000000;}
+    to {color: #ffffff;}
+    from {border-radius: 20%}
+    to {border-radius: 50%}
 }
 
 .blink {
     animation-name: flash;
-    animation-duration: 2s;
+    animation-duration: 1s;
     -webkit-animation-iteration-count: 1;
+}
+
+@keyframes correct {
+    from {background-color: #ffffff;}
+    to {background-color: transparent;}
+    from {border: 1px solid #ff901f;}
+    to {border: 1px solid white;}
+    from {color: #ff3640;}
+    to {color: transparent;}
+}
+
+.correct {
+animation-name: correct;
+    animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+.wrong {
+
 }

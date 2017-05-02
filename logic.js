@@ -9,8 +9,9 @@ $(document).ready(function() {
     var right = $('#right');
     var startGame = $('#start-game');
     var input = $('.box');
-    var i=0; //TODO I think this is causing randomGenerate to have issues.
-
+    var i=0;
+    var roundCounter = $('#round-count');
+    var roundCountText = $('#round-count-text');
     var options = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
     var generatedSequence = [];
 
@@ -23,26 +24,31 @@ $(document).ready(function() {
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
 
+        //Expands the Game Board. TODO: Working on this.
         animateGame();
 
-        //Adds functionality for arrows to work after Start button is clicked.
-        // matchMaker();
+        roundCounter.html('1');
 
         //Begins generating randomly.
         randomGenerate();
 
     });
 
+    function enter() {
+        if (event.key === "Enter") {
+            // console.log('Enter key worked');
+            animateGame();
+
+            //Begins generating randomly.
+            randomGenerate();
+        }
+    }
+
     //Adds functionality to animate gameboard initially.
     function animateGame() {
-        input.animate({
-            height: "200px",
-            width: "200px"
-        }, 400);
-        startGame.animate({
-            opacity: "0"
-        }, 400);
+
     }
+
 
     //Function that randomly generates a sequence from array 'options' and put the results into the array named 'generatedSequence'.
     function randomGenerate () {
@@ -50,11 +56,12 @@ $(document).ready(function() {
         var random = options[Math.floor(Math.random() * options.length)];
         generatedSequence.push(random);
         console.log(generatedSequence);
-
+        iterator();
     }
 
     //----------------------------------------------------------------------------------------------------------------
 
+        //This just adds the ability for the browser to listen for key presses and sets the behavior for them.
         window.addEventListener("keydown", function (event) {
 
 
@@ -91,14 +98,7 @@ $(document).ready(function() {
                     break;
             }
 
-            if (event.key === "Enter") {
-                // console.log('Enter key worked');
-                animateGame();
-
-                //Begins generating randomly.
-                randomGenerate();
-
-            }
+            enter();
 
             match();
         });
@@ -111,6 +111,7 @@ $(document).ready(function() {
             i++;
             if (i === generatedSequence.length) {
                 console.log("Win round");
+                roundCounter.html(i+1);
                 iterator();
                 randomGenerate();
             } else {
@@ -118,6 +119,8 @@ $(document).ready(function() {
             }
         } else {
             console.log("Game Over");
+            roundCounter.html('');
+            roundCountText.html('');
             i=0;
         }
     }
@@ -127,20 +130,33 @@ $(document).ready(function() {
             switch (e) {
                 case "ArrowUp": {
                     console.log('up');
-                    up.fadeIn(100).fadeOut(100).fadeIn(100);
+                    up.removeClass('correct');
+                    setTimeout(function () {
+                        up.addClass('correct');
+                    }, 1);
                 } break;
                 case "ArrowDown": {
                     console.log('down');
-                    down.fadeIn(100).fadeOut(100).fadeIn(100);
+                    down.removeClass('correct');
+                    setTimeout(function () {
+                        down.addClass('correct');
+                    }, 1);
                 } break;
                 case "ArrowLeft": {
                     console.log('left');
-                    left.fadeIn(100).fadeOut(100).fadeIn(100);
+                    left.removeClass('correct');
+                    setTimeout(function () {
+                        left.addClass('correct');
+                    }, 1);
                 } break;
                 case "ArrowRight": {
                    console.log('right');
-                    right.fadeIn(100).fadeOut(100).fadeIn(100);
-                }
+                    right.removeClass('correct');
+                    setTimeout(function () {
+                        right.addClass('correct');
+                    }, 1);
+                } break;
+
             }
         });
     }
