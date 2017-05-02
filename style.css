@@ -31,6 +31,7 @@ button:focus {
 }
 
 #game-container {
+    border: 2px solid #1dffa3;
     position: relative;
     transform: rotate(45deg);
     margin: 200px auto;
@@ -73,6 +74,19 @@ button:focus {
     top: -100px;
 }
 
+@keyframes wrongflash {
+    from {border: 2px solid #ffb11e;}
+    to {border: 2px solid #ff1948;}
+    from {background-color: rgba(255, 25, 72, 0.7);}
+    to {background-color: transparent;}
+}
+
+.wrong {
+    animation-name: wrongflash;
+    animation-duration: .3s;
+    -webkit-animation-iteration-count: 3;
+}
+
 @keyframes flash {
     from {border: 2px solid #30df5c;}
     to {border: 1px solid #ffffff;}
@@ -101,8 +115,4 @@ button:focus {
 animation-name: correct;
     animation-duration: .2s;
     -webkit-animation-iteration-count: 1;
-}
-
-.wrong {
-
 }

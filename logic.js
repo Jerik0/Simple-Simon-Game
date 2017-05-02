@@ -25,7 +25,7 @@ $(document).ready(function() {
             i=0;
             startGame.html('Start Game');
         }
-        //Expands the Game Board. TODO: Working on this.
+
         animateGame();
 
         roundCounter.html('1');
@@ -47,13 +47,12 @@ $(document).ready(function() {
 
     //Adds functionality to animate gameboard initially.
     function animateGame() {
-        if (input.height == '0') {
+        if (input.height === '0') {
             input.animate({
             height: "toggle",
             width: "toggle"
-        })};
+        })}
     }
-
 
     //Function that randomly generates a sequence from array 'options' and put the results into the array named 'generatedSequence'.
     function randomGenerate () {
@@ -127,11 +126,9 @@ $(document).ready(function() {
                 console.log("Round not complete yet");
             }
         } else {
-            //shrinks the inputs to nothing when conditions fail.
-            input.animate({
-                height: "toggle",
-                width: "toggle"
-            });
+            console.log(generatedSequence[i]);
+            $('#' + generatedSequence[i]).addClass('wrong');
+            gameBox.addClass('wrong');
             startGame.html('TRY AGAIN');
             roundCounter.html('');
             roundCountText.html('GAME OVER');
