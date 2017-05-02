@@ -16,6 +16,7 @@ $(document).ready(function() {
     var generatedSequence = [];
 
     //----------------------------------------------------------------------------------------------------------------
+    //TODO: Change how the generator is activated (as opposed to being activated by start button).
     //TODO: Iterator will not animate second consecutive animation on same element
     //TODO: Complete 'game over' functionality: 'restart' button appears and resets everything.
     //TODO: Change start button when clicked on.
