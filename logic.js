@@ -10,6 +10,9 @@ $(document).ready(function() {
     var startGame = $('#start-game');
     var tryAgain = $('#try-again');
     var input = $('.box');
+    var playButton = $('#play');
+    var stopButton = $('#stop');
+    var audio = new Audio('audio/Spellbound.mp3');
     var i=0;
     var roundCounter = $('#round-count');
     var roundCountText = $('#round-count-text');
@@ -39,6 +42,14 @@ $(document).ready(function() {
     tryAgain.click(function() {
         tryAgain.attr('id', 'start-game');
         startGame.html('Now Playing');
+    });
+
+    playButton.click(function() {
+        audio.play();
+    });
+
+    stopButton.click(function() {
+        audio.pause();
     });
 
     function enter() {
@@ -165,13 +176,14 @@ $(document).ready(function() {
                 clearInterval(intervalId);
             }
 
-            //Removes classes 'repeat' and 'blink' from anything with class 'box', in order to animate it again. (and not animate blink again).
+            //Removes class 'blink' from anything with class 'box', in order to animate it again. (and not animate blink again).
             $('.box').removeClass('blink');
-            //TODO add a .stop() here?? In order to make the second consecutive animation fire.
 
             //adds the class 'repeat' to the array "generatedSequence"'s current index which is at position: 'count'.
             // $('#' + generatedSequence[count]).addClass('repeat');
             $('#' + generatedSequence[count]).addClass('repeat');
+
+            //sets a delay on removing the class 'repeat' so it will animate before removing.
             setTimeout(function() {
                 $('.box').removeClass('repeat');
             }, 500);
