@@ -1,4 +1,6 @@
 body {
+    padding: 0;
+    margin: 0;
     background-image: url('img/dark_mosaic.png');
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
@@ -7,15 +9,36 @@ body {
     overflow: hidden;
 }
 
-#nav-bar {
-
+#play, #stop {
+    height: 64px;
+    width: 64px;
 }
 
-.audio-controls {
+#nav-bar {
+    line-height: 68px;
+    font-size: 2em;
+    position: relative;
+    height: 68px;
+    background-color: #2a292a;
+}
 
+#nav-bar-content {
+    position: absolute;
+    right: -175px;
+    top: 0;
+    border: 1px solid cyan;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgba(61, 204, 168, 1);
+    height: 66px;
+    width: 200px;
 }
 
 #round-count-text {
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 130px;
+    left: -300px;
     font-weight: lighter;
     box-shadow:
             inset 20px 5px 30px #49A68F,
@@ -33,14 +56,18 @@ button:focus {
 }
 
 #try-again {
+    box-shadow:
+            inset 20px 15px 20px #cc3e27,
+            inset -20px 0 20px #ae1d08;
     padding-left: 10px;
     display: inline;
     text-align: center;
     font-size: 1.1em;
     color: #ffffff;
-    background-color: #ff3b49;
-    /*border-radius: 10px;*/
-    border-style: none;
+    background-color: #ff0c1e;
+    /*border-style: none;*/
+    font-weight: lighter;
+    border-color: #000000;
     width: 100px;
     transform: rotate(-45deg);
     position: absolute;
@@ -87,9 +114,9 @@ button:focus {
     border: 2px solid #1dffa3;
     position: relative;
     transform: rotate(45deg);
-    margin: 200px auto;
-    height: 275px;
-    width: 275px;
+    margin: 160px auto;
+    height: 250px;
+    width: 250px;
 }
 
 .box {
@@ -185,16 +212,10 @@ animation-name: repeat;
 
 @keyframes top {
 from{
-    left: -100px;
-    top: -100px;
-    opacity: 1;
-    width: 200px;
+
 }
 to{
-    left: -120px;
-    top: -175px;
-    opacity: 0;
-    width: 100px;
+
     }
 }
 
@@ -202,34 +223,71 @@ to{
     animation-name: top;
     animation-duration: 1.5s;
     -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 @keyframes down {
-
+    from{
+        left: 100px;
+        top: 75px;
+        opacity: 1;
+        width: 200px;
+    }
+    to{
+        left: 150px;
+        top: 205px;
+        opacity: 0;
+        width: 100px;
+    }
 }
 
 .broken-down {
     animation-name: down;
     animation-duration: 1.5s;
     -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 @keyframes left {
-
+    from{
+        left: -100px;
+        top: -100px;
+        opacity: 1;
+        width: 200px;
+    }
+    to{
+        left: -120px;
+        top: -175px;
+        opacity: 0;
+        width: 100px;
+    }
 }
 
 .broken-left {
     animation-name: left;
     animation-duration: 1.5s;
     -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 @keyframes right {
-
+    from{
+        left: -100px;
+        top: -100px;
+        opacity: 1;
+        width: 200px;
+    }
+    to{
+        left: -120px;
+        top: -175px;
+        opacity: 0;
+        width: 100px;
+    }
 }
 
 .broken-right {
     animation-name: right;
     animation-duration: 1.5s;
     -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }

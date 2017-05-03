@@ -28,6 +28,18 @@ $(document).ready(function() {
     //TODO: Add sounds and (maybe) music.
     //TODO: Work on 'enter' key functionality.
 
+    $('#nav-bar-content').hover(function() {
+        $('#nav-bar-content').animate({
+            right: "0px"
+        })
+    });
+
+    $('#nav-bar-content').mouseleave(function() {
+        $('#nav-bar-content').animate({
+            right: "-175px"
+        })
+    });
+
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
         roundCounter.html('1');
@@ -145,11 +157,11 @@ $(document).ready(function() {
     function gameOver() {
         $('#' + generatedSequence[i]).addClass('wrong');
         gameBox.addClass('wrong');
+        generatedSequence = [];
         startGame.attr('id', 'try-again');
         startGame.html('TRY AGAIN');
         roundCounter.html('');
         roundCountText.html('GAME OVER');
-        i=0;
         setTimeout(function() {
             breakGame();
         }, 1000);
@@ -157,7 +169,10 @@ $(document).ready(function() {
 
     //Function that animates the game Board when game Over.
     function breakGame() {
-        input.addClass('broken-up');
+        up.addClass('broken-up');
+        down.addClass('broken-down');
+        left.addClass('broken-left');
+        right.addClass('broken-right');
     }
 
     //This function repeats back the sequence that has been randomly generated and put inside the array 'generatedSequence'.
@@ -197,8 +212,6 @@ $(document).ready(function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    //----------------------------------------------------------------------------------------------------------------
-
-//testing stuff generatedSequence = ["up", "up", "up"];
+//----------------------------------------------------------------------------------------------------------------
 
 });
