@@ -22,6 +22,13 @@ body {
     background-color: #2a292a;
 }
 
+#nav-bar-text {
+    background-color: transparent;
+    display: inline-block;
+    box-shadow:
+            0 0 100px 10px #3DCCA8;
+}
+
 #nav-bar-content {
     position: absolute;
     right: -175px;
