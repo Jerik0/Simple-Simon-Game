@@ -7,22 +7,67 @@ body {
     overflow: hidden;
 }
 
+#round-count-text {
+    font-weight: lighter;
+    box-shadow:
+            inset 20px 5px 30px #49A68F,
+            inset -20px 0 30px #4E998F;
+    border-radius: 15px;
+    padding: 5px;
+    display: inline;
+    background-color: #28444D;
+    color: #ffffff;
+
+}
+
 button:focus {
     outline: none;
 }
 
-#start-game {
+#try-again {
+    padding-left: 10px;
     display: inline;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.1em;
     color: #ffffff;
     background-color: #ff3b49;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     border-style: none;
     width: 100px;
     transform: rotate(-45deg);
     position: absolute;
-    top: 95px;
+    top: 98px;
+    left: 85px;
+}
+
+#quarter-slot {
+    background-color: #000000;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 134px;
+    left: 101px;
+    border: 2px solid #483f44;
+    height: 55px;
+    width: 2px;
+}
+
+#start-game {
+    box-shadow:
+            inset 20px 15px 20px #cc3e27,
+            inset -20px 0 20px #ae1d08;
+    padding-left: 10px;
+    display: inline;
+    text-align: center;
+    font-size: 1.1em;
+    color: #ffffff;
+    background-color: #ff0c1e;
+    /*border-style: none;*/
+    font-weight: lighter;
+    border-color: #000000;
+    width: 100px;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 98px;
     left: 85px;
 }
 
@@ -40,15 +85,17 @@ button:focus {
 }
 
 .box {
-    border-style: outset;
     color: transparent;
     transform: rotate(-45deg);
     text-align: center;
     vertical-align: middle;
     line-height: 200px;
-    background-color: aquamarine;
+    background-color: #e9ffee;
     position: absolute;
-    border: 1px solid white;
+    border: solid 3px #1dffa3;
+    box-shadow:
+            inset 70px 30px 100px #3DCCA8,
+            inset -50px 0 100px #5a99ae;
     border-radius: 50%;
     height: 200px;
     width: 200px;
@@ -88,31 +135,93 @@ button:focus {
 }
 
 @keyframes flash {
-    from {border: 2px solid #30df5c;}
-    to {border: 1px solid #ffffff;}
     from {color: #000000;}
     to {color: #ffffff;}
     from {border-radius: 20%}
     to {border-radius: 50%}
-    from {font-size: 1.5em;}
-    to {font-size: 1.7em;}
+    from {font-size: 1.4em;}
+    to {font-size: 1.6em;}
 }
 
 .blink {
     animation-name: flash;
-    animation-duration: 1s;
+    animation-duration: .5s;
     -webkit-animation-iteration-count: 1;
 }
 
-@keyframes correct {
-    from {background-color: #ffffff;}
+@keyframes repeat {
+    from {background-color: rgba(255, 188, 30, 0.71);}
     to {background-color: transparent;}
-    from {border: 1px solid #ff901f;}
-    to {border: 1px solid white;}
+    from {color: #ffffff;}
+    to {color: transparent;}
+    from {font-size: 1.4em;}
+    to {font-size: 1.6em;}
 }
 
-.correct {
-animation-name: correct;
-    animation-duration: .2s;
+.repeat {
+animation-name: repeat;
+    animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@keyframes broken {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.broken {
+    animation-name: broken;
+    animation-duration: 1.5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@keyframes top {
+from{
+    left: -100px;
+    top: -100px;
+    opacity: 1;
+    width: 200px;
+}
+to{
+    left: -120px;
+    top: -175px;
+    opacity: 0;
+    width: 100px;
+    }
+}
+
+.broken-up {
+    animation-name: top;
+    animation-duration: 1.5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@keyframes down {
+
+}
+
+.broken-down {
+    animation-name: down;
+    animation-duration: 1.5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@keyframes left {
+
+}
+
+.broken-left {
+    animation-name: left;
+    animation-duration: 1.5s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@keyframes right {
+
+}
+
+.broken-right {
+    animation-name: right;
+    animation-duration: 1.5s;
     -webkit-animation-iteration-count: 1;
 }

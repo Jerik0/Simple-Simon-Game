@@ -8,6 +8,7 @@ $(document).ready(function() {
     var left = $('#left');
     var right = $('#right');
     var startGame = $('#start-game');
+    var tryAgain = $('#try-again');
     var input = $('.box');
     var i=0;
     var roundCounter = $('#round-count');
@@ -26,42 +27,32 @@ $(document).ready(function() {
 
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
-
-        if (startGame.html('TRY AGAIN')) {
-            i=0;
-            startGame.html('Start Game');
-        }
-
-        animateGame();
-
         roundCounter.html('1');
+
+        startGame.html('Now Playing');
 
         //Begins generating randomly.
         randomGenerate();
 
     });
 
+    tryAgain.click(function() {
+        tryAgain.attr('id', 'start-game');
+        startGame.html('Now Playing');
+    });
+
     function enter() {
         if (event.key === "Enter") {
             // console.log('Enter key worked');
-            animateGame();
 
             //Begins generating randomly.
             randomGenerate();
         }
     }
 
-    //Adds functionality to animate gameboard initially.
-    function animateGame() {
-        if (input.height === '0') {
-            input.animate({
-            height: "toggle",
-            width: "toggle"
-        })}
-    }
-
     //Function that randomly generates a sequence from array 'options' and put the results into the array named 'generatedSequence'.
     function randomGenerate () {
+        //start the count at 0 again
         i=0;
         var random = options[Math.floor(Math.random() * options.length)];
         generatedSequence.push(random);
@@ -74,6 +65,9 @@ $(document).ready(function() {
         //This just adds the ability for the browser to listen for key presses and sets the behavior for them.
         window.addEventListener("keydown", function (event) {
 
+            if(event.key === "Enter"){
+                startGame.click();
+            }
 
             switch (event.key) {
                 case "ArrowUp": {
@@ -132,41 +126,58 @@ $(document).ready(function() {
                 console.log("Round not complete yet");
             }
         } else {
-            console.log(generatedSequence[i]);
-            $('#' + generatedSequence[i]).addClass('wrong');
-            gameBox.addClass('wrong');
-            startGame.html('TRY AGAIN');
-            roundCounter.html('');
-            roundCountText.html('GAME OVER');
-            i=0;
+            gameOver();
         }
     }
 
+    //Adds functionality to animate gameboard initially.
+    function gameOver() {
+        $('#' + generatedSequence[i]).addClass('wrong');
+        gameBox.addClass('wrong');
+        startGame.attr('id', 'try-again');
+        startGame.html('TRY AGAIN');
+        roundCounter.html('');
+        roundCountText.html('GAME OVER');
+        i=0;
+        setTimeout(function() {
+            breakGame();
+        }, 1000);
+    }
+
+    //Function that animates the game Board when game Over.
+    function breakGame() {
+        input.addClass('broken-up');
+    }
+
+    //This function repeats back the sequence that has been randomly generated and put inside the array 'generatedSequence'.
     function iterator() {
 
         //sets its counter to zero inside the function
         var count = 0;
 
-                        //sets Interval at which to execute iterator
+                         //sets Interval at which to execute iterator
         var intervalId = setInterval(function() {
 
-            // if the variable 'count' is equal to the length of the array 'generatedSequence'
+            // if the variable 'count' is equal to the length of the array 'generatedSequence' (once it has reached the end of the array)
             if (count === generatedSequence.length) {
 
                 //clears the interval (stops the function 'iterator')
                 clearInterval(intervalId);
             }
 
-            //Removes classes 'correct' and 'blink' from anything with class 'box', in order to animate it again. (and not animate blink again).
+            //Removes classes 'repeat' and 'blink' from anything with class 'box', in order to animate it again. (and not animate blink again).
             $('.box').removeClass('blink');
-            $('.box').removeClass('correct');
+            //TODO add a .stop() here?? In order to make the second consecutive animation fire.
 
-            //adds the class 'correct' to the array "generatedSequence"'s current index which is at position: 'count'.
-            $('#' + generatedSequence[count]).addClass('correct');
-
+            //adds the class 'repeat' to the array "generatedSequence"'s current index which is at position: 'count'.
+            // $('#' + generatedSequence[count]).addClass('repeat');
+            $('#' + generatedSequence[count]).addClass('repeat');
+            setTimeout(function() {
+                $('.box').removeClass('repeat');
+            }, 500);
             //adds one to the position of count
             count++;
-        }, 500);
+        }, 800);
     }
 
     //a function whos parameter's first letter will be replaced (with slice) and capitalized.
@@ -176,5 +187,6 @@ $(document).ready(function() {
 
     //----------------------------------------------------------------------------------------------------------------
 
+//testing stuff generatedSequence = ["up", "up", "up"];
 
 });
