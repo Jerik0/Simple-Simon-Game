@@ -197,7 +197,7 @@ button:focus {
 
 .blink {
     animation-name: flash;
-    animation-duration: .5s;
+    animation-duration: .3s;
     -webkit-animation-iteration-count: 1;
 }
 
