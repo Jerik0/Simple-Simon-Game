@@ -27,7 +27,7 @@ body {
 #nav-bar-text {
     background-color: transparent;
     display: inline-block;
-    text-shadow: 3px 3px #2bb3aa;
+    text-shadow: 3px 3px #1dffa3;
 }
 
 @keyframes hover {
@@ -66,10 +66,10 @@ transform: translate3d(-175px, 0px, 0px);
     box-shadow:
             inset 20px 5px 30px #49A68F,
             inset -20px 0 30px #4E998F;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 5px;
     display: inline;
-    background-color: #28444D;
+    background-color: #17d288;
     color: #ffffff;
 
 }
