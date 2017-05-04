@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     "use strict";
 
-    var gameBox = $('#game-container');
+    var gameBox = $('#play-box');
     var up = $('#up');
     var down = $('#down');
     var left = $('#left');
@@ -17,7 +17,7 @@ $(document).ready(function() {
     var gameOverCounter = $('#game-over-counter');
     var seconds = 10;
     var i=0;
-    var roundCounter = $('#round-count');
+    var $roundCounter = $('#round-count');
     var roundCountText = $('#round-count-text');
     var options = ["up", "down", "left", "right"];
     var generatedSequence = [];
@@ -37,28 +37,31 @@ $(document).ready(function() {
     }
 
     //calls the specified functions when the "Start Game" button is clicked.
-    function startUp() {
-        startGame.click(function () {
-            roundCounter.html('1');
-            roundCountText.html('Round Count: ')
-            input.removeClass('wrong');
-            up.removeClass('broken-up');
-            down.removeClass('broken-down');
-            left.removeClass('broken-left');
-            right.removeClass('broken-right');
-            $('#game-over').animate({
-                top: "-70px"
-            });
+    startGame.click(function() {
+        //Begins generating randomly.
+        randomGenerate();
+        start();
+        });
 
-            //Begins generating randomly.
-            randomGenerate();
-
+    function start() {
+        startGame.off();
+        roundCountText.show();
+        roundCountText.html('Round Count: 1' );
+        input.removeClass('wrong');
+        up.removeClass('broken-up');
+        down.removeClass('broken-down');
+        left.removeClass('broken-left');
+        right.removeClass('broken-right');
+        $('#game-over').animate({
+            top: "-70px"
         });
     }
-    startUp();
+
 
     function tryAgainClick(secondCounter) {
         tryAgain.click(function () {
+            //enables startGame button again.
+            startGame.on('click', start);
             clearTimeout(secondCounter);
             startGame.show();
 
@@ -145,14 +148,12 @@ $(document).ready(function() {
             //if the value of i is equal to the length of the array 'generatedSequence'
             if (i === generatedSequence.length) {
                 console.log("Win round");
-                roundCounter.html(i+1);
+                roundCountText.html('Round Count: ' + (i+1));
                 iterator();
                 randomGenerate();
             } else {
                 console.log("Round not complete yet");
             }
-        } else if (event.key === 'Enter') {
-
         } else {
             console.log('game over');
             gameOver();
@@ -162,8 +163,6 @@ $(document).ready(function() {
     //Adds functionality to animate gameboard initially.
     function gameOver() {
         seconds = 10;
-
-        console.log('game over');
 
         //adds a class to the current sequence index and the gamebox that flashes red.
         $('#' + generatedSequence[i]).addClass('wrong');
@@ -180,10 +179,10 @@ $(document).ready(function() {
 
         //sets the round count back to nothing.
 
-        roundCounter.html('');
+        $roundCounter.text(0);
 
         //makes the text of "round count" change to "GAME OVER".
-        roundCountText.html('GAME OVER');
+        roundCountText.hide();
 
         //after 1 second, the game over banner will drop down to 10px from the top of the screen.
         setTimeout(function() {
@@ -222,8 +221,8 @@ $(document).ready(function() {
             }
 
             // if the variable 'count' is equal to the length of the array 'generatedSequence' (once it has reached the end of the array)
-            if (count === generatedSequence.length) {
 
+            if (count === generatedSequence.length) {
                 //clears the interval (stops the function 'iterator')
                 clearInterval(intervalId);
             }
@@ -238,6 +237,7 @@ $(document).ready(function() {
             setTimeout(function() {
                 $('.box').removeClass('repeat');
             }, 500);
+
             //adds one to the position of count
             count++;
         }, 800);
