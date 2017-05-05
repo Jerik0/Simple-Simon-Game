@@ -38,12 +38,11 @@ $(document).ready(function() {
 
     //calls the specified functions when the "Start Game" button is clicked.
     startGame.click(function() {
-        //Begins generating randomly.
-        randomGenerate();
         start();
         });
 
     function start() {
+        generatedSequence = [];
         startGame.off();
         roundCountText.show();
         roundCountText.html('Round Count: 1' );
@@ -55,6 +54,8 @@ $(document).ready(function() {
         $('#game-over').animate({
             top: "-70px"
         });
+        //Begins generating randomly.
+        randomGenerate();
     }
 
 
